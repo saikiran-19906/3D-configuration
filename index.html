@@ -6,10 +6,9 @@
 </head>
 	
 <body>
-	
-    <model-viewer id="my-model" src="Assets/buster_drone_2.glb"
+    <model-viewer id="my-model" src="Assets/buster_drone_2"
                   alt="A 3D model"
-                  camera-controls autoplay animation-name="animation1" style= "width:1000px; height: 1000px">
+                  camera-controls autoplay animation-name="animation1" style="width:500px; height:500px">
       <button slot="hotspot-1" onclick="playAnimation()">Click me to play animation</button>
     </model-viewer>
 
@@ -20,7 +19,8 @@
         myModel.play(); // play animation once
         myModel.addEventListener('animation-finish', function stopAnimation() {
           myModel.pause(); // stop animation at end frame
-        }, { once: true });
+          myModel.removeEventListener('animation-finish', stopAnimation); // remove event listener
+        });
       }
     </script>
   </body>
