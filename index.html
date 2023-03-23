@@ -8,8 +8,8 @@
 <body>
 	
     <model-viewer id="my-model" src="Assets/buster_drone_2.glb"
-                  alt="A 3D model of an myModel"
-                  camera-controls>
+                  alt="A 3D model"
+                  camera-controls autoplay animation-name="animation1" style= "width:1000px; height: 1000px">
       <button slot="hotspot-1" onclick="playAnimation()">Click me to play animation</button>
     </model-viewer>
 
@@ -18,13 +18,11 @@
         const myModel = document.querySelector('#my-model');
         myModel.currentTime = 0; // rewind to start of animation
         myModel.play(); // play animation once
-        myModel.addEventListener('timeupdate', function stopAnimation(event) {
-          if (event.target.currentTime >= event.target.duration) {
-            event.target.pause(); // stop animation at end frame
-            event.target.removeEventListener('timeupdate', stopAnimation);
-          }
-        });
+        myModel.addEventListener('animation-finish', function stopAnimation() {
+          myModel.pause(); // stop animation at end frame
+        }, { once: true });
       }
     </script>
   </body>
+	
 </html>
