@@ -7,19 +7,38 @@
 	 <body>
     <model-viewer id="my-model" src="Assets/buster_drone_2.glb"
                   alt="A 3D model"
-                  camera-controls animation-name="animation1"style="width:1000px; height:1000px">
+                  camera-controls animation-name="animation1">
       <button slot="hotspot-1" onclick="toggleAnimation()">Click me to play in reverse</button>
     </model-viewer>
 
     <script>
+      let animationTime = 0;
+      let animationPlaying = false;
+
       function toggleAnimation() {
         const myModel = document.querySelector('#my-model');
-        myModel.currentTime = myModel.duration;
-        myModel.playbackRate = -1;
-        myModel.play();
+        if (!animationPlaying) {
+          animationTime = myModel.currentTime;
+          myModel.pause();
+          animationPlaying = true;
+          requestAnimationFrame(reverseAnimation);
+        }
+      }
+
+      function reverseAnimation(timeStamp) {
+        const myModel = document.querySelector('#my-model');
+        const timeDiff = timeStamp - animationTime;
+        myModel.currentTime = myModel.duration - timeDiff / 1000;
+        if (myModel.currentTime <= 0) {
+          myModel.pause();
+          animationPlaying = false;
+          return;
+        }
+        requestAnimationFrame(reverseAnimation);
       }
     </script>
   </body>
+	 
 	
 	
 	
