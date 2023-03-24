@@ -7,31 +7,20 @@
 	 <body>
     <model-viewer id="my-model" src="Assets/buster_drone_2.glb"
                   alt="A 3D model"
-                  camera-controls animation-name="animation1" style="width:700px; height:700px;">
-      <button slot="hotspot-1" onclick="toggleAnimation()">Click me to play/pause animation</button>
+                  camera-controls animation-name="animation1">
+      <button slot="hotspot-1" onclick="toggleAnimation()">Click me to play in reverse</button>
     </model-viewer>
 
     <script>
-      let playForwards = true;
-      
       function toggleAnimation() {
         const myModel = document.querySelector('#my-model');
-        if (playForwards) {
-          myModel.pause();
-          myModel.currentTime = myModel.duration;
-          myModel.playbackRate = -1;
-          myModel.play();
-          playForwards = false;
-        } else {
-          myModel.pause();
-          myModel.currentTime = 0;
-          myModel.playbackRate = 1;
-          myModel.play();
-          playForwards = true;
-        }
+        myModel.currentTime = myModel.duration;
+        myModel.playbackRate = -1;
+        myModel.play();
       }
     </script>
   </body>
+	
 	
 	
 </html>
