@@ -4,10 +4,10 @@
   <title>Model Viewer with Hotspot</title>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
 </head>
-	  <body>
+	<body>
     <model-viewer id="my-model" src="Assets/buster_drone_2.glb"
                   alt="A 3D model"
-                  camera-controls animation-name="animation1">
+                  camera-controls animation-name="animation1" style="width:500px; height: 500px">
       <button slot="hotspot-1" onclick="toggleAnimation()">Click me to play animation</button>
     </model-viewer>
 
@@ -15,21 +15,31 @@
       function toggleAnimation() {
         const myModel = document.querySelector('#my-model');
         if (myModel.paused) {
-          myModel.play(); // play animation once
-          myModel.addEventListener('animation-finish', stopAnimation);
+          myModel.play(); // play animation forward
+          myModel.addEventListener('animation-finish', pauseAnimationForward);
+        } else if (myModel.currentTime === myModel.duration) {
+          myModel.playbackRate = -1; // play animation in reverse
+          myModel.play(); // start playing in reverse
+          myModel.addEventListener('animation-finish', pauseAnimationReverse);
         } else {
-          myModel.pause(); // pause animation at current time
-          myModel.removeEventListener('animation-finish', stopAnimation);
+          myModel.playbackRate = -1; // play animation in reverse
+          myModel.play(); // start playing in reverse
         }
       }
 
-      function stopAnimation() {
+      function pauseAnimationForward() {
         const myModel = document.querySelector('#my-model');
         myModel.pause(); // pause animation at end frame
-        myModel.removeEventListener('animation-finish', stopAnimation); // remove event listener
+        myModel.removeEventListener('animation-finish', pauseAnimationForward); // remove event listener
+      }
+
+      function pauseAnimationReverse() {
+        const myModel = document.querySelector('#my-model');
+        myModel.pause(); // pause animation at first frame
+        myModel.currentTime = 0; // reset the animation to the first frame
+        myModel.playbackRate = 1; // set the playback rate back to forward
+        myModel.removeEventListener('animation-finish', pauseAnimationReverse); // remove event listener
       }
     </script>
-  </body>
-
-	
+	</body>	
 </html>
