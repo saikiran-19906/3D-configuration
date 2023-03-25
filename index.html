@@ -1,30 +1,36 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Model Viewer with Hotspot</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+	<title>Google Model Viewer with Hotspot</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdn.jsdelivr.net/npm/three@0.131.2/build/three.min.js"></script>
+	<script src="https://modelviewer.dev/shared/model-viewer-base.js"></script>
+	<script src="https://modelviewer.dev/shared/model-viewer.js"></script>
 </head>
-	<body>
-		 <model-viewer id="hotspot-camera-view-demo" src="Assets/buster_drone_2.glb" alt="Thor and the Midgard Serpent" camera-controls touch-action="none" camera-orbit="-8.142746deg 68.967deg 0.6179899m" camera-target="-0.003m 0.0722m 0.0391m" field-of-view="45deg" min-field-of-view="25deg">
-  <button class="view-button" slot="hotspot-0" data-position="-0.0569m 0.0969m -0.1398m" data-normal="-0.5829775m 0.2863482m -0.7603565m" data-orbit="-50.94862deg 84.56856deg 0.06545582m" data-target="-0.04384604m 1m -0.1213202m">
-    The Fighters
-  </button> 
-</model-viewer>
+<body>
+	<model-viewer
+		id="modelViewer"
+		src="Assets/scene.gltf" 
+		ios-src="path/to/your/model.usdz"
+		alt="A 3D model"
+		autoplay
+		camera-controls
+		animation-name="animation"
+		animation-loop
+		animation-play-once
+		background-color="#fff"
+	></model-viewer>
 
-<script type="module">
-  const modelViewer2 = document.querySelector("#hotspot-camera-view-demo");
-  const annotationClicked = (annotation) => {
-    let dataset = annotation.dataset;
-    modelViewer2.cameraTarget = dataset.target;
-    modelViewer2.cameraOrbit = dataset.orbit;
-    modelViewer2.fieldOfView = '45deg';
-  }
+	<script>
+		const modelViewer = document.getElementById('modelViewer');
+		const hotspot = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({color: 0xff0000}));
+		hotspot.position.set(0, 0, -1); // adjust the position of the hotspot
+		modelViewer.scene.add(hotspot);
 
-  modelViewer2.querySelectorAll('button').forEach((hotspot) => {
-    hotspot.addEventListener('click', () => annotationClicked(hotspot));
-  });
-</script>
-  </body>
-	
-	
+		hotspot.addEventListener('click', () => {
+			modelViewer.animationMixer.clipAction('animation').clampWhenFinished = true;
+		});
+	</script>
+</body>
 </html>
