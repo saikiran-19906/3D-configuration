@@ -4,11 +4,11 @@
   <title>Model Viewer with Hotspot</title>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
 </head>
-	 <body>
-    <model-viewer id="my-model" src="Assets/buster_drone_2.glb"
-                 alt="A 3D model"
+	<body>
+	<model-viewer id="my-model" src="Assets/buster_drone_2.glb"
+                  alt="A 3D model"
                   camera-controls animation-name="animation1">
-      <button slot="hotspot-1" onclick="toggleAnimation()">reverse</button>
+      <button slot="hotspot-1" onclick="toggleAnimation()">Click me to play in reverse</button>
     </model-viewer>
 
     <script>
@@ -17,17 +17,19 @@
       function toggleAnimation() {
         const myModel = document.querySelector('#my-model');
         if (!animationPlaying) {
-          myModel.pause();
-          myModel.setAttribute('animation-playback-direction', 'reverse');
+          myModel.currentTime = myModel.duration;
+          myModel.playbackRate = -1;
           myModel.play();
           animationPlaying = true;
         } else {
           myModel.pause();
-          myModel.setAttribute('animation-playback-direction', 'normal');
+          myModel.currentTime = 0;
+          myModel.playbackRate = 1;
           myModel.play();
           animationPlaying = false;
         }
       }
     </script>
+	</body>
 	
 </html>
