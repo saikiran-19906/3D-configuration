@@ -4,7 +4,7 @@
   <title>Model Viewer with Hotspot</title>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
 </head>
-	<body>
+	 <body>
     <model-viewer id="my-model" src="Assets/buster_drone_2.glb"
                   alt="A 3D model"
                   camera-controls animation-name="animation1">
@@ -12,13 +12,30 @@
     </model-viewer>
 
     <script>
+      let animationTime = 0;
+      let animationPlaying = false;
+
       function toggleAnimation() {
         const myModel = document.querySelector('#my-model');
-        myModel.currentTime = myModel.duration;
-        myModel.playbackRate = -1;
-        myModel.play();
+        if (!animationPlaying) {
+          animationTime = myModel.currentTime;
+          myModel.pause();
+          animationPlaying = true;
+          requestAnimationFrame(reverseAnimation);
+        }
+      }
+
+      function reverseAnimation(timeStamp) {
+        const myModel = document.querySelector('#my-model');
+        const timeDiff = timeStamp - animationTime;
+        myModel.currentTime = myModel.duration - timeDiff / 1000;
+        if (myModel.currentTime <= 0) {
+          myModel.pause();
+          animationPlaying = false;
+          return;
+        }
+        requestAnimationFrame(reverseAnimation);
       }
     </script>
-  </body>
 	
 </html>
