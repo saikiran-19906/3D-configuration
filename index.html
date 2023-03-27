@@ -3,39 +3,29 @@
 <html>
 <head>
 	<title>Google Model Viewer with Hotspot</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.131.2/build/three.min.js"></script>
-	<script src="https://modelviewer.dev/shared/model-viewer-base.js"></script>
-	<script src="https://modelviewer.dev/shared/model-viewer.js"></script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
 	
 </head>
-<body>
-	<model-viewer
-		id="modelViewer"
-		src="Assets/scene.gltf" 
-		alt="A 3D model"
-		autoplay
-		camera-controls
-		animation-name="animation"
-		animation-loop
-		animation-play-once
-		background-color="#fff"
-		     
-	>
-	 <button class="hotspot" slot="hotspot-visor" data-position="0 1.75 0.35" data-normal="0 0 1"></button>
-	
-	</model-viewer>
+	<body>
+  <model-viewer
+  src="Assets/scene.gltf" 
+    alt="A 3D model of an astronaut"
+    camera-controls
+    auto-rotate
+    ar>
+    <button
+      slot="hotspot-1"
+      data-position="0 0 0"
+      data-normal="0 1 0"
+      data-visibility-attribute="visible"
+      data-popup="#popup-1">
+      Click me!
+    </button>
 
-	<script>
-		const modelViewer = document.getElementById('modelViewer');
-		const hotspot = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({color: 0xff0000}));
-		hotspot.position.set(0, 0, -1); // adjust the position of the hotspot
-		modelViewer.scene.add(hotspot);
-
-		hotspot.addEventListener('click', () => {
-			modelViewer.animationMixer.clipAction('animation').clampWhenFinished = true;
-		});
-	</script>
+    <div id="popup-1" style="display: none;">
+      <h2>My Popup</h2>
+      <p>This is some example text to show in the popup.</p>
+    </div>
+  </model-viewer>
 </body>
 </html>
