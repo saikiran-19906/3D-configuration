@@ -4,21 +4,32 @@
 <head>
 	<title>Google Model Viewer with Hotspot</title>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+	
 	  <script>
     function playAnimation() {
       const modelViewer = document.querySelector('model-viewer');
-      modelViewer.animationName = 'animation-name'; // Replace with the name of your animation
-      modelViewer.currentTime = 0;
-      modelViewer.play();
-      setTimeout(function() {
-        modelViewer.pause();
-      }, modelViewer.duration * 1000);
+      if (modelViewer.paused || modelViewer.ended) {
+        modelViewer.animationName = 'animation-name'; // Replace with the name of your animation
+        modelViewer.currentTime = 0;
+        modelViewer.play();
+        setTimeout(function() {
+          modelViewer.pause();
+        }, modelViewer.duration * 1000);
+      } else {
+        modelViewer.reverse = true;
+        modelViewer.play();
+        setTimeout(function() {
+          modelViewer.pause();
+          modelViewer.reverse = false;
+          modelViewer.currentTime = 0;
+        }, modelViewer.duration * 1000);
+      }
     }
   </script>
 </head>
 <body>
   <model-viewer
-    src="Assets/buster_drone_2.glb" 
+     src="Assets/buster_drone_2.glb" 
     alt="A 3D model of an astronaut"
     camera-controls
     auto-rotate
