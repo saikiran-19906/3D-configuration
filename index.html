@@ -1,38 +1,60 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Google Model Viewer with Hotspot</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
-	
-	<body>
-    <model-viewer src="Assets/buster_drone_2.glb"
-                  alt="A 3D model of an astronaut"
-                  camera-controls
-                  auto-rotate
-                  background-color="#f6f6f6">
-      <button slot="hotspot-1" data-position="-0.2 1.5 -1.5" onclick="playAnimation()">Info</button>
-      <div slot="hotspot-description" id="hotspot-desc-1">
-        This is some information about the astronaut model.
-      </div>
-    </model-viewer>
+  <head>
+    <title>My 3D Model with Hotspot Button and Animation</title>
+    <script src="https://threejs.org/build/three.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <button id="hotspot" style="position: absolute; top: 20px; left: 20px;">Play Animation</button>
 
     <script>
-      function playAnimation() {
-        const modelViewer = document.querySelector('model-viewer');
-        const mixer = new THREE.AnimationMixer(modelViewer.scene);
-        const animationClip = modelViewer.animations[0];
-        const action = mixer.clipAction(animationClip);
-        action.play();
+      let scene, camera, renderer, mixer;
 
-        modelViewer.addEventListener('update', () => {
-          if (mixer.time >= animationClip.duration) {
-            action.stop();
-            modelViewer.pause();
-          }
+      init();
+      animate();
+
+      function init() {
+        // Set up the scene
+        scene = new THREE.Scene();
+
+        // Set up the camera
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        // Set up the renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('container').appendChild(renderer.domElement);
+
+        // Load the 3D model
+        const loader = new THREE.GLTFLoader();
+        loader.load('Assets/scene.gltf', (gltf) => {
+          scene.add(gltf.scene);
+
+          // Set up the animation mixer
+          mixer = new THREE.AnimationMixer(gltf.scene);
+          const animationClip = gltf.animations[0];
+          const action = mixer.clipAction(animationClip);
+
+          // Set up the hotspot button
+          const hotspot = document.getElementById('hotspot');
+          hotspot.addEventListener('click', () => {
+            action.play();
+          });
         });
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        if (mixer) {
+          mixer.update(0.01);
+        }
+
+        renderer.render(scene, camera);
       }
     </script>
   </body>
-
 </html>
