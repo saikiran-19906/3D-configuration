@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://modelviewer.dev/shared/modelviewer.js"></script>
-  
+    
   </head>
-  
-  
- <body>
-    <model-viewer src="Assets/buster_drone_3.glb"
+  <body>
+    <model-viewer id="my-model"
+                  src="Assets/buster_drone_3.glb"
                   alt="A 3D model of an astronaut"
                   auto-rotate
                   camera-controls
@@ -20,11 +19,23 @@
                position="0.3m 1.7m -0.2m"
                normal="0 1 0"
                style="cursor: pointer;"
-               onclick="document.querySelector('model-viewer').animationName = 'Start_Liftoff';">
+               onclick="playModelAnimation();">
         <button>Play Animation</button>
       </hotspot>
     </model-viewer>
+    <script>
+      function playModelAnimation() {
+        // Get a reference to the model-viewer element
+        var modelViewer = document.querySelector('#my-model');
+        // Set the animationName property to the name of the animation you want to play
+        modelViewer.animationName = 'Start_Liftoff';
+        // Play the animation
+        modelViewer.play();
+        // Pause the animation at the end of the animation
+        modelViewer.addEventListener('animation-finish', function() {
+          modelViewer.pause();
+        });
+      }
+    </script>
   </body>
-  
-  
 </html>
