@@ -12,7 +12,7 @@
                   alt="A 3D model of an astronaut"
                   auto-rotate
                   camera-controls
-                  ar style= width:1000px; height:1000px>
+                  ar>
       <!-- Add a hotspot element with a button as its content -->
       <hotspot id="play-animation-hotspot"
                slot="hotspot-1"
@@ -31,10 +31,10 @@
         modelViewer.animationName = 'Start_Liftoff';
         // Play the animation
         modelViewer.play();
-        // Pause the animation at the end of the animation
+        // Pause the animation at the second-to-last frame of the animation
         modelViewer.addEventListener('timeupdate', function() {
-          if (modelViewer.currentTime >= modelViewer.duration) {
-            modelViewer.currentTime = modelViewer.duration;
+          if (modelViewer.currentTime >= modelViewer.duration - 0.01) {
+            modelViewer.currentTime = modelViewer.duration - 0.01;
             modelViewer.pause();
           }
         });
