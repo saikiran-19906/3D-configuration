@@ -6,7 +6,7 @@
     <script src="https://modelviewer.dev/shared/modelviewer.js"></script>
     
   </head>
-  <body>
+   <body>
     <model-viewer id="my-model"
                   src="Assets/buster_drone_3.glb"
                   alt="A 3D model of an astronaut"
@@ -32,8 +32,10 @@
         // Play the animation
         modelViewer.play();
         // Pause the animation at the end of the animation
-        modelViewer.addEventListener('animation-finish', function() {
-          modelViewer.pause();
+        modelViewer.addEventListener('timeupdate', function() {
+          if (modelViewer.currentTime >= modelViewer.duration) {
+            modelViewer.pause();
+          }
         });
       }
     </script>
