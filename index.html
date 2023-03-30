@@ -22,12 +22,11 @@
             <div class="progress-bar hide" slot="progress-bar">
                 <div class="update-bar"></div>
             </div>
-            <button id="explodeButton"
-            slot="hotspot-one"
+            <button class="playbutton" id="animation" onclick="toggleAnimation()"
             data-position="0.16 0.1 0.17"
             data-normal="-0.07 0.97 0.23">Hotspot</button>
       
-      <div><button class="playbutton" id="animation" onclick="toggleAnimation()">Open</button></div>
+      
 <script>
 function toggleAnimation() {
         let animation,state;
