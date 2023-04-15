@@ -104,8 +104,10 @@
             data-position="0.16 0.1 0.17"
             data-normal="-0.07 0.97 0.23">Open</button>
 				 
+				   </model-viewer>
+				 
 			 <img src="Assets/img/Circle.svg" alt="">
-				  </model-viewer>
+				
 			 
 		  </div>
       </div>
@@ -176,6 +178,45 @@
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader"></div>
+	
+	<script>
+function toggleAnimation() {
+        let animation,state;
+        animation = document.getElementById("animation");
+        state = animation.innerText;
+        if(state == 'Open') 
+        {
+            animation.innerText = "Close";
+            model.timeScale = 1;
+            model.updateHotspot({ 
+                name: 'hotspot-1', //Name of hotspot when open
+                position: "-0.25217607736855535m 110.35097035692672m 68.70624102514762m"
+            });
+        }
+         else {
+            animation.innerText = "Open";
+            model.timeScale = -1;
+            model.updateHotspot({ 
+                name: 'hotspot-1', //Name of hotspot when closed
+                position: "0.07838113854751327m 109.68274346113967m 7.710404087301681m"
+            });
+        }
+        model.play({repetitions: 1});
+        console.log(model.currentTime);
+        console.log(animation);
+    };
+  function toggleCameraPosition() {
+  var viewer = document.querySelector('model-viewer');
+  if (viewer.cameraOrbit == '0deg 90deg 2m') {
+    viewer.cameraOrbit = '0deg 0deg 1m';
+    viewer.cameraTarget = '0m 0m -1m';
+  } else {
+    viewer.cameraOrbit = '0deg 90deg 2m';
+    viewer.cameraTarget = '0m 0m 0m';
+  }
+}
+  
+  </script>
 
   <!-- Vendor JS Files -->
   <script src="Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
