@@ -90,10 +90,10 @@ h6 {
   z-index: -1
 }
 #model { 
-	height: 200%;
+	height: 250%;
     width: 100%;
     position: absolute;
-    margin-top: -15%;
+    margin-top: -20%;
 }
 
 /*--------------------------------------------------------------
