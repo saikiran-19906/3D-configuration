@@ -87,7 +87,10 @@ h6 {
 #model-view img.active {
   z-index: -1
 }
-#model { height:100%; position: absolute;}
+#model { 
+	height: 100%;
+	 position: absolute;
+}
 
 /*--------------------------------------------------------------
 # Sections & Section Header
