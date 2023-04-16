@@ -59,6 +59,31 @@ h6 {
 /*--------------------------------------------------------------
 # Sections & Section Header
 --------------------------------------------------------------*/
+#model-view {
+  position: relative;
+  height: 0;
+  /* 
+   * REPLACE HEIGHT WITH PADDING BOTTOM %, 
+   * WHICH WORKS FROM THE SCREEN WIDTH 
+   * THIS MAKING THE HEIGHT RESPONSIVE
+   **/
+  padding-bottom: 40%;
+}
+#model-view img {
+  position: absolute;
+  z-index: 1;
+  /*
+   * SET THE MAX-WIDTH TO 100% 
+   * WHICH WILL ONLY FILL THE CURRENT CONTAINER
+   **/
+  max-width: 100% !important;
+  margin-top: -33px;
+  margin-left: -25px;
+}
+#model-view img.active {
+  z-index: 3
+}
+
 section {
   overflow: hidden;
   padding: 80px 0;
