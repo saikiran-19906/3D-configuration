@@ -79,6 +79,7 @@ h6 {
 #model-view img {
   position: absolute;
 	margin-top: -22%;
+	margin-right: 5%;
   z-index: -1;
   /*
    * SET THE MAX-WIDTH TO 100% 
