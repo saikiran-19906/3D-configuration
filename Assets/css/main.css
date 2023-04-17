@@ -79,13 +79,13 @@ h6 {
 #model-view img {
   position: absolute;
 	margin-top: -22%;
-	margin-right: 5%;
+	margin-left: 5%;
   z-index: -1;
   /*
    * SET THE MAX-WIDTH TO 100% 
    * WHICH WILL ONLY FILL THE CURRENT CONTAINER
    **/
-  max-width: 100% !important;
+  max-width: 90% !important;
 }
 #model-view img.active {
   z-index: -1
