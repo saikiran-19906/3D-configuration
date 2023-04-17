@@ -96,10 +96,10 @@
                       ar-modes="webxr scene-viewer quick-look" 
                       shadow-intensity="0"
                       camera-controls camera-orbit="119.3deg 85.05deg 110m"
-                  camera-target="0m 10m 0m"
+                  camera-target="0m 12m 0m"
                   field-of-view="30deg"
-                  min-field-of-view="80deg"
-                  max-field-of-view="120deg"
+                  min-field-of-view="55deg"
+                  max-field-of-view="30deg"
                   interpolation-decay="100"
                   
                       exposure="1">
@@ -219,10 +219,16 @@ function toggleAnimation() {
   var viewer = document.querySelector('model-viewer');
   if (viewer.cameraOrbit == '119.3deg 85.05deg 110m') {
     viewer.cameraOrbit = '180deg 0deg 1m';
-    viewer.cameraTarget = '0m 10m 0m';
+	  viewer.fieldOfView = '30deg';
+	  viewer.minFieldOfView = '55deg';
+          viewer.maxFieldOfView = '30deg';
+    viewer.cameraTarget = '0m 12m 0m';
   } else {
     viewer.cameraOrbit = '119.3deg 85.05deg 110m';
-    viewer.cameraTarget = '0m 10m 0m';
+    viewer.cameraTarget = '0m 12m 0m';
+	   viewer.fieldOfView = '30deg';
+	  viewer.minFieldOfView = '55deg';
+          viewer.maxFieldOfView = '30deg';
   }
 }
   
