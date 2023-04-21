@@ -200,7 +200,7 @@ function toggleAnimation() {
         state = animation.innerText;
         if(state == 'Open') 
         {
-            animation.innerText = "Close";
+            animation.innerText = "";
             model.timeScale = 1;
             model.updateHotspot({ 
                 name: 'hotspot-1', //Name of hotspot when open
@@ -208,7 +208,7 @@ function toggleAnimation() {
             });
         }
          else {
-            animation.innerText = "Open";
+            animation.innerText = "";
             model.timeScale = -1;
             model.updateHotspot({ 
                 name: 'hotspot-1', //Name of hotspot when closed
