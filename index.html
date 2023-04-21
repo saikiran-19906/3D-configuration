@@ -107,10 +107,10 @@
             <div class="progress-bar hide" slot="progress-bar">
                 <div class="update-bar"></div>
             </div>
-         <!--   <button class="playbutton" id="animation" onclick="toggleAnimation(); toggleCameraPosition();"
+          <button class="playbutton" id="animation" onclick="toggleAnimation(); toggleCameraPosition();"
                     slot="hotspot-one"
             data-position="0.16 0.1 0.17"
-            data-normal="-0.07 0.97 0.23">Open</button> -->
+            data-normal="-0.07 0.97 0.23">Close</button>
 				 
 				   </model-viewer>
 					 
@@ -198,9 +198,9 @@ function toggleAnimation() {
         let animation,state;
         animation = document.getElementById("animation");
         state = animation.innerText;
-        if(state == 'Open') 
+        if(state == 'Close') 
         {
-            animation.innerText = "";
+            animation.innerText = "Open";
             model.timeScale = 1;
             model.updateHotspot({ 
                 name: 'hotspot-1', //Name of hotspot when open
@@ -208,7 +208,7 @@ function toggleAnimation() {
             });
         }
          else {
-            animation.innerText = "";
+            animation.innerText = "Close";
             model.timeScale = -1;
             model.updateHotspot({ 
                 name: 'hotspot-1', //Name of hotspot when closed
